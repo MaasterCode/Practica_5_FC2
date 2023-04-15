@@ -1,3 +1,4 @@
+
 /*---------------------------------------------------------------------
  **
  **  Fichero:
@@ -14,7 +15,7 @@
 
 // There are 8 squares surrounding any square
 const int nSize = 8;
-const int mSize = 5;
+
 int neighborsVectors[8][2] = {
 		{ -1, -1 }, { -1, 0 }, { -1, 1 },
 		{ 0, -1 }, { 0, 1 },
@@ -24,39 +25,42 @@ int (*neighborPointer)[2] = neighborsVectors;
 
 int matrix1[5][5] = {
 		{0, 0, 0, 0, 0},
+		{0, 1, 1, 0, 0},
+		{0, 1, 0, 0, 0},
 		{0, 0, 0, 0, 0},
-		{0, 0, 1, 1, 0},
-		{0, 0, 1, 0, 0},
 		{0, 0, 0, 0, 0},
 };
 
 /*
  * Esperado matriz 1
  *  {0, 0, 0, 0, 0},
+	{0, 1, 1, 0, 0},
+	{0, 1, 1, 0, 0},
 	{0, 0, 0, 0, 0},
-	{0, 0, 1, 1, 0},
-	{0, 0, 1, 1, 0},
 	{0, 0, 0, 0, 0},
  */
 
-int matrix2[5][5] = {
-		{0, 0, 0, 0, 0},
-		{0, 0, 1, 1, 0},
-		{0, 0, 1, 0, 1},
-		{0, 0, 1, 0, 0},
-		{0, 0, 0, 0, 0},
+int matrix2[7][7] = {
+		{1, 1, 0, 0, 0, 1, 1},
+		{1, 0, 1, 1, 0, 0, 1},
+		{0, 0, 1, 0, 1, 0, 0},
+		{1, 1, 1, 0, 0, 1, 0},
+		{0, 0, 0, 0, 1, 1, 0},
+		{1, 0, 0, 0, 0, 0, 1},
+		{1, 1, 0, 1, 0, 1, 1},
 };
 
-/*
- * Esperado matriz 2
- *  {0, 0, 0, 0, 0},
-	{0, 0, 1, 1, 0},
-	{0, 1, 1, 0, 0},
-	{0, 0, 0, 1, 0},
-	{0, 0, 0, 0, 0},
- */
 
-int (*playing_matrix)[5] = matrix1;
+/*
+ * 	Esperado matriz 2
+ 		{1, 1, 1, 0, 0, 1, 1},
+		{1, 0, 1, 1, 1, 0, 1},
+		{1, 0, 0, 0, 1, 1, 0},
+		{0, 1, 1, 0, 0, 1, 0},
+		{1, 0, 0, 0, 1, 1, 1},
+		{1, 1, 0, 0, 1, 0, 1},
+		{1, 1, 0, 0, 0, 1, 1},
+ */
 
 int resultMatrix[5][5] = {
 		{0, 0, 0, 0, 0},
@@ -64,8 +68,24 @@ int resultMatrix[5][5] = {
 		{0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0},
 		{0, 0, 0, 0, 0},
-	};
-extern int ** gameOfLife(int matrix[][5],  int mSize, int neighborVector[][2], int nSize, int resMatrix[][5]);
+};
+
+int resultMatrix2[7][7] = {
+		{0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0},
+};
+
+const int mSize = 7;
+int (*playing_matrix)[7] = matrix2;
+int (*playing_result_matrix)[7] = resultMatrix2;
+
+
+extern int ** gameOfLife(int matrix[][7],  int mSize, int neighborVector[][2], int nSize, int resMatrix[][7]);
 /*
 int ** gameOfLife(int matrix[][5], int mSize, int neighborVector[][2], int nSize, int resultMatrix[][5]) {
 // Check neighbors
@@ -102,6 +122,8 @@ int ** gameOfLife(int matrix[][5], int mSize, int neighborVector[][2], int nSize
 	return resultMatrix;
 };
 */
+
+/*
 int countNeighbors(int matrix[][5], int mSize, int neighborVector[][2], int nSize, int i, int j) {
 	int neighborCount = 0;
 	int newi;
@@ -119,6 +141,7 @@ int countNeighbors(int matrix[][5], int mSize, int neighborVector[][2], int nSiz
 
 	return neighborCount;
 }
+*/
 
 int mul(int a, int x) {
 	return a * x;
@@ -127,6 +150,6 @@ int mul(int a, int x) {
 void main() {
 
 	int **respointer;
-	respointer = gameOfLife(playing_matrix, mSize, neighborPointer, nSize, resultMatrix);
+	respointer = gameOfLife(playing_matrix, mSize, neighborPointer, nSize, playing_result_matrix);
 	while(1);
 }
