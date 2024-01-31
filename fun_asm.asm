@@ -3,7 +3,7 @@
 **  Fichero:
 **    fun_asm.asm  19/10/2022
 **
-**    (c) Daniel Báscones García
+**    Author Felix Garcia Narocki
 **    Fundamentos de Computadores II
 **    Facultad de Informática. Universidad Complutense de Madrid
 **
